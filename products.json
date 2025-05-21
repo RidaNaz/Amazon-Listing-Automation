@@ -1,0 +1,14 @@
+[
+  {
+    "sku": "PYTHON-MUG-01",
+    "title": "I Love Python Coffee Mug",
+    "price": 14.99,
+    "quantity": 20,
+    "description": "Ceramic mug for Python developers",
+    "bullet_points": [
+      "Dishwasher safe",
+      "11oz capacity",
+      "Perfect gift for coders"
+    ]
+  }
+]
