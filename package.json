@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.15.21"
+  },
+  "dependencies": {
+    "@types/debug": "^4.1.12",
+    "debug": "^4.4.1"
+  }
+}
