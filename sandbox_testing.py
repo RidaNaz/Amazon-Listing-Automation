@@ -1,0 +1,114 @@
+import requests
+import json
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# def get_access_token():
+#     """Get LWA access token using refresh token"""
+#     token_url = "https://api.amazon.com/auth/o2/token"
+    
+#     data = {
+#         "grant_type": "refresh_token",
+#         "refresh_token": os.getenv('SANDBOX_REFRESH_TOKEN'),
+#         "client_id": os.getenv('SANDBOX_CLIENT_ID'),
+#         "client_secret": os.getenv('SANDBOX_CLIENT_SECRET')
+#     }
+    
+#     response = requests.post(token_url, data=data)
+#     return response.json().get('access_token')
+
+def load_products(file_path='products.json'):
+    """Load products from JSON file and adapt for sandbox"""
+    with open(file_path) as f:
+        products = json.load(f)
+    
+    # Sandbox-specific modifications
+    for product in products:
+        product['product_data']['requirements'] = 'LISTING'
+        product['product_data']['attributes']['brand'] = 'SANDBOX_BRAND'
+        product['product_data']['attributes']['manufacturer'] = 'SANDBOX_MFG'
+        
+        # Ensure required fields for sandbox
+        if product['product_data']['productType'] == 'SHOES':
+            product['product_data']['attributes'].setdefault('size', '10')
+        elif product['product_data']['productType'] == 'LUGGAGE':
+            product['product_data']['attributes'].setdefault('size', 'Medium')
+            
+    return products
+
+def create_sandbox_listings():
+    """Create listings for all products in JSON file"""
+    access_token = os.getenv('SANDBOX_ACCESS_TOKEN')
+    products = load_products()
+    results = []
+    
+    for product in products:
+        url = f"https://sandbox.sellingpartnerapi-eu.amazon.com/listings/2021-08-01/items/ATVPDKIKX0DER/{product['sku']}"
+        
+        params = {
+            "marketplaceIds": "A1F83G8C2ARO7P",
+            "includedData": "issues"
+        }
+        
+        headers = {
+            "x-amz-access-token": access_token,
+            "Content-Type": "application/json",
+            "accept": "application/json"
+        }
+        
+        try:
+            response = requests.put(
+                url,
+                params=params,
+                json=product['product_data'],
+                headers=headers
+            )
+            results.append({
+                'sku': product['sku'],
+                'status': 'SUCCESS',
+                'response': response.json()
+            })
+        except Exception as e:
+            results.append({
+                'sku': product['sku'],
+                'status': 'FAILED',
+                'error': str(e)
+            })
+    
+    return results
+
+def get_listing(sku):
+    """Get listing details for a specific SKU"""
+    access_token = os.getenv('SANDBOX_ACCESS_TOKEN')
+    
+    url = f"https://sandbox.sellingpartnerapi-eu.amazon.com/listings/2021-08-01/items/ATVPDKIKX0DER/{sku}"
+    params = {
+        "marketplaceIds": "A1F83G8C2ARO7P",
+        "includedData": "summaries"
+    }
+    
+    headers = {
+        "x-amz-access-token": access_token,
+        "accept": "application/json"
+    }
+    
+    response = requests.get(url, params=params, headers=headers)
+    return response.json()
+
+if __name__ == '__main__':
+    # Create listings from JSON file
+    creation_results = create_sandbox_listings()
+    print("Creation Results:")
+    for result in creation_results:
+        print(f"SKU: {result['sku']} - {result['status']}")
+        if 'response' in result:
+            print(json.dumps(result['response'], indent=2))
+        elif 'error' in result:
+            print(f"Error: {result['error']}")
+    
+    # Check one listing as example
+    print("\nListing Details for TEST_SKU_1:")
+    print(json.dumps(get_listing("TEST_SKU_1"), indent=2))
