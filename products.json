@@ -12,14 +12,14 @@
                     "currency": "GBP"
                 },
                 "minimum_price": {
-                    "value": 89.99,
+                    "value": 79.99,
                     "currency": "GBP"
                 },
                 "item_type": "luggage",
                 "color": "Black",
                 "size": "Medium",
                 "main_image": {
-                    "link": "https://via.placeholder.com/500",
+                    "link": "https://www.junglemug.com/cdn/shop/collections/Group_39892_5c108ecf-6033-4f13-934a-e6635d670c72.png?v=1737468874",
                     "height": 500,
                     "width": 500
                 },
@@ -41,14 +41,14 @@
                     "currency": "GBP"
                 },
                 "minimum_price": {
-                    "value": 49.99,
+                    "value": 39.99,
                     "currency": "GBP"
                 },
                 "item_type": "mens-shoes",
                 "color": "Blue",
                 "size": "10",
                 "main_image": {
-                    "link": "https://via.placeholder.com/500",
+                    "link": "https://www.junglemug.com/cdn/shop/collections/Group_39892_5c108ecf-6033-4f13-934a-e6635d670c72.png?v=1737468874",
                     "height": 500,
                     "width": 500
                 },
