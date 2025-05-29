@@ -2,15 +2,58 @@
     {
         "sku": "TEST_SKU_1",
         "product_data": {
-            "productType": "HOME",
-            "requirements": "LISTING",
+            "productType": "LUGGAGE",
             "attributes": {
-                "item_name": "Test Product",
-                "brand": "Test Brand",
+                "item_name": "Premium Hardshell Cabin Luggage with Spinner Wheels - Black",
+                "brand": "SANDBOX_BRAND",
+                "manufacturer": "SANDBOX_MFG",
                 "standard_price": {
-                    "amount": 19.99,
+                    "value": 99.99,
                     "currency": "GBP"
-                }
+                },
+                "minimum_price": {
+                    "value": 79.99,
+                    "currency": "GBP"
+                },
+                "item_type": "luggage",
+                "color": "Black",
+                "size": "Medium",
+                "main_image": {
+                    "link": "https://www.junglemug.com/cdn/shop/collections/Group_39892_5c108ecf-6033-4f13-934a-e6635d670c72.png?v=1737468874",
+                    "height": 500,
+                    "width": 500
+                },
+                "external_product_id": "SANDBOX123456",
+                "external_product_id_type": "GTIN"
+            }
+        }
+    },
+    {
+        "sku": "TEST_SKU_2",
+        "product_data": {
+            "productType": "SHOES",
+            "attributes": {
+                "item_name": "Test Running Shoes - Blue Size 10",
+                "brand": "SANDBOX_BRAND",
+                "manufacturer": "SANDBOX_MFG",
+                "standard_price": {
+                    "value": 59.99,
+                    "currency": "GBP"
+                },
+                "minimum_price": {
+                    "value": 39.99,
+                    "currency": "GBP"
+                },
+                "item_type": "mens-shoes",
+                "color": "Blue",
+                "size": "10",
+                "main_image": {
+                    "link": "https://www.junglemug.com/cdn/shop/collections/Group_39892_5c108ecf-6033-4f13-934a-e6635d670c72.png?v=1737468874",
+                    "height": 500,
+                    "width": 500
+                },
+                "external_product_id": "SANDBOX67890",
+                "external_product_id_type": "GTIN"
             }
         }
     }
